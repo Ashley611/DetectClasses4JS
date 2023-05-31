@@ -1,0 +1,62 @@
+{
+  "name": "almin-logger",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/almin/almin.git"
+  },
+  "author": "azu",
+  "email": "azuciao@gmail.com",
+  "homepage": "https://github.com/almin/almin/tree/master/packages/almin-logger",
+  "license": "MIT",
+  "files": [
+    "src/",
+    "lib/"
+  ],
+  "bugs": {
+    "url": "https://github.com/almin/almin/issues"
+  },
+  "version": "6.1.5",
+  "description": "logger for Almin.js",
+  "main": "lib/src/AlminLogger.js",
+  "types": "lib/src/AlminLogger.d.ts",
+  "directories": {
+    "test": "test"
+  },
+  "scripts": {
+    "clean": "rimraf lib/",
+    "prebuild": "npm run clean",
+    "build": "cross-env NODE_ENV=production tsc -p .",
+    "build:test": "tsc -p test/",
+    "watch": "tsc -p . --watch",
+    "prepublish": "npm run --if-present build",
+    "test:saucelabs": "zuul -- lib/test/*-test.js",
+    "test:browser": "npm run build:test && zuul --local 8080 --ui mocha-bdd -- lib/test/*-test.js",
+    "test": "rimraf out/ && npm run build:test && mocha out/test/",
+    "posttest": "rimraf out/",
+    "ci": "npm run test"
+  },
+  "keywords": [
+    "almin",
+    "logger",
+    "log"
+  ],
+  "devDependencies": {
+    "@types/mocha": "^2.2.44",
+    "@types/node": "^9.3.0",
+    "almin": "^0.16.0",
+    "cross-env": "^5.1.1",
+    "mocha": "^4.0.1",
+    "power-assert": "^1.4.4",
+    "rimraf": "^2.6.2",
+    "simple-mock": "^0.8.0",
+    "typescript": "~2.6.2",
+    "webpack": "^3.8.1",
+    "zuul": "^3.10.1"
+  },
+  "peerDependencies": {
+    "almin": "^0.15.0"
+  },
+  "dependencies": {
+    "map-like": "^2.0.0"
+  }
+}

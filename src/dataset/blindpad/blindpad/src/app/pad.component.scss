@@ -1,0 +1,228 @@
+@import "./mixins.scss";
+@import "./variables.scss";
+
+:host {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+
+  bp-logo {
+    display: block;
+    color: $color-primary-text;
+    @include image-text();
+    cursor: pointer;
+  }
+
+  .opt-out-button {
+    font-style: italic;
+    margin-top: 24px;
+  }
+
+  pad-page {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-flow: column nowrap;
+    background-color: $color-editor;
+    transition: .3s all linear;
+
+    &.disabled {
+      @include filter(blur(1.7px) opacity(0.6));
+
+      & > pad-header {
+        opacity: 0;
+      }
+
+      & > pad-body > pad-toolbar {
+        opacity: 0;
+      }
+
+      &:after {
+        content: "";
+        position: absolute;
+        z-index: 1000;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        @include background-gradient($color-background);
+      }
+    }
+
+    pad-header {
+      background-color: $color-header;
+      flex: 0 0 $header-height;
+      box-sizing: border-box;
+      border-bottom: 1px solid $color-divider;
+      display: flex;
+      align-items: center;
+
+      bp-logo {
+        display: inline;
+        margin-left: 8px;
+        font-size: 14pt;
+      }
+
+      nav {
+        margin-left: auto;
+        display: flex;
+        align-items: center;
+
+        & > * {
+          margin-left: 16px;
+        }
+
+        .mode-button {
+          padding: 0px 12px;
+          margin-top: 0px;
+          margin-bottom: 0px;
+          height: $header-height - 1px;
+          border-radius: 0;
+          font-size: 14px;
+
+          &:after {
+            margin-left: 4px;
+            content: "\25BE";
+          }
+        }
+
+        mode-choices {
+          position: absolute;
+          top: $header-height;
+          right: 0;
+          background-color: $color-overlay;
+          max-height: calc(100% - #{$header-height});
+          // padding: 8px 0px;
+          overflow-y: auto;
+          z-index: 1000;
+          min-width: 140px;
+
+          mode-choice {
+            display: block;
+            text-align: left;
+            font-size: 14px;
+            padding: 4px 12px 4px 16px;
+            cursor: pointer;
+
+            &:hover {
+              background-color: $color-primary;
+            }
+
+            &.has-children:after {
+              content: "\25B8";
+              float: right;
+            }
+
+            &.is-picked:before {
+              content: "\2713";
+              margin: 0 0 0 -12px;
+              padding: 4px 0px 4px 0px;
+            }
+          }
+        }
+      }
+    }
+
+    pad-body {
+      flex-grow: 1;
+      display: flex;
+      flex-flow: row;
+
+      pad-toolbar {
+        display: flex;
+        flex-direction: column;
+        justify-content: flex-end;
+        overflow-y: auto;
+        max-width: 200px;
+        min-width: 60px;
+        flex: 1 1;
+
+        pad-status {
+          display: block;
+          padding-left: 6px;
+          padding-bottom: 16px;
+        }
+      }
+
+      editor {
+        display: block;
+        flex: 3 3;
+        overflow-y: auto;
+      }
+    }
+  }
+
+  /** overlays */
+
+  welcome-modal,
+  audio-modal,
+  about-modal {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 2;
+    display: flex;
+    align-items: center;
+
+    modal-body {
+      width: 400px;
+      display: block;
+      margin: auto;
+    }
+  }
+
+  welcome-modal {
+    .reconfigure-prompt {
+      &,
+      * {
+        font-style: italic;
+      }
+      margin-top: 24px;
+    }
+  }
+
+  audio-modal {
+    .start-button {
+      display: inline-block;
+      vertical-align: middle;
+    }
+
+    audio-monitor {
+      display: inline-block;
+      height: 12px;
+      width: 180px;
+      margin-left: 12px;
+      vertical-align: middle;
+    }
+
+    test-phrases {
+      display: block;
+    }
+  }
+
+  about-modal {
+    overflow: auto;
+
+    modal-body {
+      width: 600px;
+      padding: 0px 12px;
+    }
+
+    bp-logo {
+      font-size: 48px;
+      margin-top: 48px;
+    }
+
+    .footer {
+      display: block;
+      margin: 40px 0;
+    }
+  }
+}

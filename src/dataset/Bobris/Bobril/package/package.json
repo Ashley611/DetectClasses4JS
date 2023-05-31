@@ -1,0 +1,24 @@
+{
+    "name": "bobril",
+    "version": "8.4.1",
+    "description": "Component Oriented MVC Framework with virtual DOM and CSS",
+    "main": "index.js",
+    "types": "index.d.ts",
+    "typescript": {
+        "main": "index.ts"
+    },
+    "prettier": {
+        "tabWidth": 4,
+        "printWidth": 120
+    },
+    "scripts": {
+        "prepublish": "prettier --write index.ts && tsc",
+        "test": "echo \"Error: no test specified\" && exit 1"
+    },
+    "author": "Boris Letocha",
+    "license": "MIT",
+    "devDependencies": {
+        "prettier": "^1.5.3",
+        "typescript": "^2.5.2"
+    }
+}

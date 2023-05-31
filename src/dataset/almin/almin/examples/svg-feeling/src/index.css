@@ -1,0 +1,7 @@
+@charset "UTF-8";
+/* Base */
+@import "./css/base/**/*.css";
+/* variable */
+@import "./css/var/**/*.css";
+/* Component */
+@import "./component/**/*.css";
